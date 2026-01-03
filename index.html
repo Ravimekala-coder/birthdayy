@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Manjushaa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: purple;
+  color: white;
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  padding-top: 25%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Name animation */
+.name {
+  font-size: 42px;
+  font-weight: bold;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px pink; }
+  to { text-shadow: 0 0 25px gold; }
+}
+
+button {
+  padding: 15px 35px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background: gold;
+  cursor: pointer;
+}
+
+img {
+  width: 70%;
+  max-width: 300px;
+  border-radius: 20px;
+  display: none;
+  margin-top: 20px;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Balloons */
+.balloon {
+  position: fixed;
+  bottom: -100px;
+  width: 40px;
+  height: 55px;
+  border-radius: 50%;
+  animation: float 6s linear infinite;
+  z-index: 0;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-120vh);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <div class="name">Manjushaa 💜</div>
+  <p>04-01-2026</p>
+
+  <p id="msg"></p>
+
+  <button id="btn" onclick="surprise()" style="display:none;">
+    🎁 Click for Surprise
+  </button>
+
+  <br>
+  <img id="photo" src="manjushaa.jpg">
+  <audio id="song" src="birthday.mp3"></audio>
+</div>
+
+<script>
+// Date unlock
+const today = new Date();
+const unlockDate = new Date("2026-01-04");
+const msg = document.getElementById("msg");
+const btn = document.getElementById("btn");
+
+if (today >= unlockDate) {
+  btn.style.display = "inline-block";
+  msg.innerHTML = "💜 A special surprise is waiting 💜";
+} else {
+  msg.innerHTML = "🎁 Surprise unlocks on 4 Jan 💜";
+}
+
+function surprise() {
+  document.getElementById("photo").style.display = "block";
+  document.getElementById("song").play();
+  startConfetti();
+  startBalloons();
+}
+
+// Confetti
+function startConfetti() {
+  for (let i = 0; i < 120; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.backgroundColor =
+      ["yellow","red","pink","cyan","white","orange"]
+      [Math.floor(Math.random()*6)];
+    c.style.animationDuration =
+      Math.random() * 3 + 2 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+}
+
+// Balloons
+function startBalloons() {
+  for (let i = 0; i < 15; i++) {
+    let b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background =
+      ["pink","red","yellow","cyan","orange"]
+      [Math.floor(Math.random()*5)];
+    b.style.animationDuration =
+      Math.random() * 4 + 4 + "s";
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 7000);
+  }
+}
+</script>
+
+</body>
+</html>
